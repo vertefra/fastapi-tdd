@@ -10,3 +10,5 @@ pyflakes==2.2.0
 starlette==0.13.6
 toml==0.10.2
 uvicorn==0.12.2
+asyncpg==0.20.1
+tortoise-orm==0.16.12
