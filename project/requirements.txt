@@ -26,3 +26,4 @@ toml==0.10.2
 tortoise-orm==0.16.18
 typing-extensions==3.7.4.3
 uvicorn==0.12.2
+requests==2.23.0
