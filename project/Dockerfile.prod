@@ -12,3 +12,34 @@ RUN mkdir $APP_HOME
 
 # Set environments variables
 
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV ENVIRONMENT prod
+ENV TESTING 0
+
+# install system dependecies
+RUN apt-get update \
+    && apt-get -y install netcat gcc postgresql \
+    && apt-get clean
+
+# install python dependencies
+
+RUN pip install --upgrade pip
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+# change ownership to the app user
+RUN chown -R app:app $APP_HOME
+
+# change user to app user
+USER app
+
+CMD gunicorn --bind 0.0.0.0:$PORT app.main:app -k uvicorn.workers.UvicornWorker
+
+
+
+
+
+
